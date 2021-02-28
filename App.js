@@ -1,21 +1,42 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from "@react-navigation/stack";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function App() {
+
+import drawer from './src/navigation/drawer';
+import LogIn2 from './src/screens/LogIn2';
+
+const Stack = createStackNavigator();
+
+
+function App() {
+  const [isLogged, setLogin] = useState(false);
+
+  const getData = async () => {
+    try {
+      return await AsyncStorage.getItem('@credentials')
+    } catch (e) {
+      alert(e);
+    }
+  }
+
+  useEffect(() => {
+
+    getData().then((value) => {
+      if (value) {
+        setLogin(true)
+      }
+    })
+  }, [])
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="LogIn2" component={LogIn2} />
+        <Stack.Screen name="drawer" component={drawer} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;

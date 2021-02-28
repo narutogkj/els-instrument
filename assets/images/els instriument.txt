@@ -1,0 +1,15 @@
+plant AND tissue
+11
+
+
+1.Air Curtain
+2.Air Pressure Module
+3.Cocopeat
+4.Lab Trolley
+5.Pass Box
+6.Plant Tissue Culture Rack
+7.Poly House
+8.Seeding Tray
+9.Shade House
+10.Tissue Culture Bottle
+11.Tissue Culture Tray
